@@ -1,9 +1,6 @@
 const express = require('express')
-const session = require('express-session')
-const mongoose = require('mongoose')
-const MongoStore = require('connect-mongo')(session)
 const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
+const mongoose = require('mongoose')
 const morgan = require('morgan')
 
 require('dotenv').config()
@@ -40,9 +37,12 @@ srv.use(passport.initialize())
 
 // Routers configuration
 require('./models/user')
+require('./models/food')
 const userRouter = require('./routes/user')
+const foodRouter = require('./routes/food')
 
 srv.use('/user', userRouter)
+srv.use('/food', foodRouter)
 ////////////////////////
 
 // Server start

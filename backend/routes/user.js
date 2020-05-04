@@ -13,7 +13,7 @@ router.post('/login', (req, res, next) => {
         if(err) {
             console.log(err)
         }
-        if(info != undefined) {
+        if(info !== undefined) {
             console.log(info.message)
             res.send(info.message)
         } else {
@@ -42,7 +42,7 @@ router.post('/register', (req, res, next) => {
         if(err) {
             console.log(err)
         }
-        if(info != undefined) {
+        if(info !== undefined) {
             console.log(info.message)
             res.send(info.message)
         } else {

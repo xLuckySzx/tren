@@ -25,7 +25,8 @@ passport.use('register', new LocalStrategy({
                             username,
                             hash,
                         }).then(user => {
-                            console.log(`User created: ${username}`)
+                            // @ts-ignore
+                            console.log(`User created: ${user.username}`)
                             return done(null, user)
                         }).catch(err => {
                             console.log(err)

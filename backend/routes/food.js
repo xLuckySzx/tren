@@ -3,9 +3,10 @@ const router = require('express').Router();
 const User = require('../models/user')
 const Food = require('../models/food')
 
-router.get('/*', passport.authenticate('jwt', { session: false }))
+router.all('/*', passport.authenticate('jwt', { session: false }))
 
 router.get('/', (req, res) => {
+    console.log(req.user)
     Food.find().select('-_id')
         .then(users => {
             res.send(users)
@@ -34,24 +35,23 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/add', (req, res, next) => {
-    res.send(req.user)
-    // Food.create({
-    //     name: req.body.name,
-    //     desc: req.body.desc,
-    //     nutrition: req.body.nutrition,
-    //     // @ts-ignore
-    //     creator: req.user
-    // }).then(food => {
-    //     // @ts-ignore
-    //     console.log(`${req.user.username} successfully created ${food}`)
-    //     res.send(food)
-    // }).catch(err => {
-    //     console.log(err)
-    //     res.send({
-    //         error: true,
-    //         message: err
-    //     })
-    // })
+    Food.create({
+        name: req.body.name,
+        desc: req.body.desc,
+        nutrition: req.body.nutrition,
+        // @ts-ignore
+        creator: req.user._id
+    }).then(food => {
+        // @ts-ignore
+        console.log(`${req.user.username} successfully created ${food}`)
+        res.send(food)
+    }).catch(err => {
+        console.log(err)
+        res.send({
+            error: true,
+            message: err
+        })
+    })
 })
 
 

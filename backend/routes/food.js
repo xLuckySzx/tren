@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:name', (req, res) => {
-    Food.findOne({ name: req.params.name }).select('-_id')
+    Food.findOne({ name: req.params.name }).select('-_id').populate('creator', '-hash')
         .then(food => {
             res.send(food)
         })
@@ -34,7 +34,7 @@ router.get('/:name', (req, res) => {
         })
 })
 
-router.post('/add', (req, res, next) => {
+router.post('/add', (req, res) => {
     Food.create({
         name: req.body.name,
         desc: req.body.desc,

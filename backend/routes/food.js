@@ -20,8 +20,8 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/:id', (req, res) => {
-    Food.findOne({ _id: req.params.id }).select('-_id')
+router.get('/:name', (req, res) => {
+    Food.findOne({ name: req.params.name }).select('-_id')
         .then(food => {
             res.send(food)
         })

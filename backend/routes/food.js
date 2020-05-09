@@ -20,7 +20,9 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:name', (req, res) => {
-    Food.findOne({ name: req.params.name }).lean().select('-_id').populate('creator', '-hash')
+    Food.findOne({ name: req.params.name })
+        .lean()
+        .populate('creator', '-hash')
         .then(food => {
             res.send(food)
         })

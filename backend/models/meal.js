@@ -4,14 +4,10 @@ const uniqueValidator = require('mongoose-unique-validator')
 const Schema = mongoose.Schema
 
 const mealSchema = new Schema({
-    name: {
+    type: {
         type: String,
-        lowercase: true,
         required: true,
-        unique: true,
-        trim: true,
-        index: true,
-        match: [/([a-zA-Z0-9 ]*)/, 'contains invalid characters'],
+        enum: ['breakfast', 'lunch', 'dinner', 'snack', 'other']
     },
     desc: {
         type: String,
